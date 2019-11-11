@@ -1,0 +1,92 @@
+{% if error is defined and error is not empty and error is not null %}
+    <div class="error">
+        {{ error }}
+        <br/>
+        {% image '@CoreRecommenderBundle/Resources/public/images/error4_gray.png' %}
+            <img src="{{ "https://core.ac.uk" ~ (asset_url) }}" alt="" class="error-image"/>
+        {% endimage %}
+    </div>
+{% elseif articles is defined and articles is not empty and articles is not null %}
+    <div id='coreStatusMessage'></div>
+    <ul>
+        {% for article in articles.documents %}
+            <li {{ (article.language is not null) ? 'lang=' ~ article.language : "" }}>
+                <a class="documentTpl" href="#" id="{{ article.id }}"
+                   data-value="{{ "https://core.ac.uk/recommender/redirect?url=" ~  article.url }}">
+                    <div class="thumb"><img alt="{{ article.id }} article preview" src="{{ "https://core.ac.uk" }}/image/{{ article.id }}/medium"/>
+                    </div>
+                    <div class="information">
+                        <div class="title">{{ article.title }}</div>
+
+                        <div class="detail-info">
+                            {% if article.repositoryName is defined and article.repositoryName is not empty and article.repositoryName is not null %}
+                                <span class="label" lang="{{ app.request.locale }}">
+                                        {{ "work_provided_by" | trans }}:&nbsp
+                                    </span>
+                                <span id="repository">
+                                    {{ article.repositoryName }}
+                                    </span>
+                            {% endif %}
+                            {% if article.publisher is defined and article.publisher is not empty and article.publisher is not null %}
+                                <span class="label">&nbsp|&nbsp</span>
+                                <span class="label" lang="{{ app.request.locale }}">
+                                        {{ "work_publisher" | trans }}:&nbsp
+                                    </span>
+                                <span id="publisher">
+                                    {{ article.publisher }}
+                                </span>
+                            {% endif %}
+
+                            {% if article.year is defined and article.year is not empty and article.year is not null %}
+                                <span class="label">&nbsp|&nbsp</span>
+                                <span class="label" lang="{{ app.request.locale }}">
+                                        {{ "work_year" | trans }}:&nbsp
+                                </span>
+                                <span id="year">{{ article.year }}</span>
+                            {% endif %}
+                        </div>
+
+                        <div id="authors">
+                                <span id="cit_authors">
+                                    {% if article.authors is defined and article.authors is not empty and article.authors is not null %}
+                                        <span class="label" lang="{{ app.request.locale }}">
+                                            {{ "work_by" | trans }}&nbsp</span>
+                                        {% for author in article.authors %}
+                                            {{ author | replace(",", " ") }}{% if not loop.last %}, {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </span>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown">
+                    {% image
+                        '@CoreRecommenderBundle/Resources/public/images/cancel4_gray.png' %}<img
+                        src="{{ (asset_url) }}" alt="Feedback" class="remove-article"/>{% endimage %}
+                    <div class="dropdown-content" lang="{{ app.request.locale }}">
+                        <!--googleoff: all-->
+                        <a href="#" onclick="return false;" class="not-relevant"
+                                                data-value="{{ article.url }}">{{ "feedback_not_relevent" | trans }}</a>
+                        <a href="#" onclick="return false;" class="abusive"
+                           data-value="{{ article.url }}">{{ "feedback_inappropriate" | trans }}</a>
+                        <!--googleon: all-->
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div class="error" lang="{{ app.request.locale }}">
+        {{ "unknown_error" | trans }}
+        <br/>
+        {% image '@CoreRecommenderBundle/Resources/public/images/error4_gray.png' %}
+            <img src="{{ "https://core.ac.uk" ~ (asset_url) }}" alt="Error" class="error-image"/>
+        {% endimage %}
+    </div>
+{% endif %}
+<div class="footer">
+    <a href="{{ "https://core.ac.uk" }}" onclick="window.open(this.href);
+                return false;">
+        <img alt="CORE logo" src="{{ "https://core.ac.uk" }}/recommender/logo.png">
+    </a>
+</div>

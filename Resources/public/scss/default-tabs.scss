@@ -1,0 +1,58 @@
+/*
+core.ac.uk
+License - change in nbproject/licenseheader.txt
+
+*/
+/* 
+    Created on : 18-Jul-2016, 15:05:36
+    Author     : vb4826
+*/
+
+#coreRecommenderOutput ul.tabs {
+    border-bottom: 1px solid #dddddd;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+#coreRecommenderOutput .tabs > li{
+    margin-bottom: -1px;
+    float: left;
+    padding-bottom: 0em;
+}
+
+#coreRecommenderOutput ul.tabs.clearfix {
+    display: inline-flex;
+}
+
+#coreRecommenderOutput .tabs > li.active > a, #coreRecommenderOutput .tabs > li.active > a:hover, #coreRecommenderOutput .tabs > li.active > a:focus {
+    color: #999999;
+    background-color: white;
+    border: 1px solid #dddddd;
+    border-bottom-color: transparent;
+    cursor: default;
+    z-index: 2;
+}
+
+#coreRecommenderOutput .tabs > li > a:focus, #coreRecommenderOutput .tabs > li > a:hover {
+    text-decoration: none;
+    background-color: #eee;
+    color: #9f410c;
+    outline: 0;
+}
+
+#coreRecommenderOutput .tabs > li > a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 15px;
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    color: #e65e11;
+    text-decoration: none;
+}
+
+#coreRecommenderOutput .clearfix:before, .clearfix:after { content: ""; display: block; }
+#coreRecommenderOutput .clearfix:after { clear: both; }
+#coreRecommenderOutput .clearfix { zoom: 1; }

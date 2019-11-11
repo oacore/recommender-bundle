@@ -1,0 +1,28 @@
+/*
+core.ac.uk
+License - change in nbproject/licenseheader.txt
+
+*/
+/* 
+    Created on : 14-Sep-2016, 16:38:14
+    Author     : vb4826
+*/
+
+.coreRecommender .title{
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.coreRecommender .label{
+    color: $label-color;
+    font-family: $regular-font;
+    font-weight: 600;
+}
+
+.coreRecommender li:hover{
+    border-right: 3px solid $label-color;
+}
+
+.coreRecommender .dropdown-content a {
+    color: $label-color;
+}

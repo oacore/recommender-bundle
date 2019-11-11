@@ -1,0 +1,47 @@
+similarity_widget2:
+    pattern:  /widget2
+    defaults: { _controller: CoreRecommenderBundle:LegacyWidget:Widget2, _format: ~ }
+    requirements:
+        _method: GET
+
+# Loads recommender in the browser language
+recommender_main:
+    pattern:  /recommender/main
+    defaults: { _controller: CoreRecommenderBundle:Main:main }
+    requirements:
+        _method: GET
+
+# Loads recommender in the language set by _locale
+recommender_main_locale:
+    pattern:  /{_locale}/recommender/main
+    defaults: { _controller: CoreRecommenderBundle:Main:main }
+    requirements:
+        _method: GET
+
+recommender_test:
+    pattern: /recommender/test
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'CoreRecommenderBundle:Recommender:test.html.twig'
+
+recommender_recommend:
+    pattern: /recommender/recommend
+    defaults: { _controller: CoreRecommenderBundle:Recommend:recommend }
+        
+recommender_removearticle:
+    pattern: /recommender/removeArticle
+    defaults: { _controller: CoreRecommenderBundle:Recommend:removeArticle }
+    requirements:
+        _method: GET
+        
+recommender_instruction:
+    pattern: /recommender/instructions
+    defaults: { _controller: CoreRecommenderBundle:Instruction:generalInstruction }
+    requirements:
+        _method: GET
+        
+recommender_instruction_id:
+    pattern: /recommender/instructions/{idRecommender}
+    defaults: { _controller: CoreRecommenderBundle:Instruction:specificInstruction }
+    requirements:
+        _method: GET

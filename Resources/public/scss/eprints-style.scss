@@ -1,0 +1,13 @@
+/* 
+    Created on : Jul 15, 2016, 11:39:58 AM
+    Author     : vb4826
+*/
+@import "../../../../../../app/Resources/public/scss/core-variables.scss";
+$eprints_brand_color: #204f76;
+@import "global-style.scss";
+@import "default-articles.scss";
+@import "eprints-fonts.scss";
+
+#coreRecommenderOutput .tabs > li > a {
+    color: $eprints_brand_color;
+}       

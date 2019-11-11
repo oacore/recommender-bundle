@@ -1,0 +1,46 @@
+<div class="tab-container" id="tabs">
+    <ul class="tabs clearfix">
+        <li id="general" class="active">
+            <a href="#">{% trans %}suggested_works{% endtrans %}</a> 
+        </li>
+        {% if nameRepository is defined and nameRepository is not empty and nameRepository is not null %}
+            <li id="specificLibrary" class=""> 
+                <a href="#">{% trans with {'%dataprovidername%': nameRepository } %}suggested_works_from_%dataprovidername%{% endtrans %}</a> 
+            </li>
+        {% endif %}
+    </ul>
+</div>
+ 
+{% block body %}
+    {% if generalArticles is not defined  and specificArticles is not defined %}
+        {% if error is defined %}
+            <div class="error">
+            {{ error }}
+            <br />
+            {% image '@CoreRecommenderBundle/Resources/public/images/error4_gray.png'%}
+                <img src="{{ (asset_url) }}" alt="" class="error-image"/>
+            {% endimage %}
+            </div>
+        {% else %}
+            <div class="loading">
+                {% trans %}is_loading_works{% endtrans %}<br />
+
+                {% image '@CoreRecommenderBundle/Resources/public/images/loading.gif'%}
+                <img src="{{(asset_url) }}" alt="" class="loading-gif"/>
+                {% endimage %}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <div id="coreRecommender-tab1" class="coreRecommender">
+        {% if generalArticles is defined %}
+            {% include 'CoreRecommenderBundle:Recommender:recContent.html.twig' with {"articles":generalArticles} %}
+        {% endif%}
+    </div>
+
+    <div id="coreRecommender-tab2" class="coreRecommender">
+        {% if specificArticles is defined %}
+            {% include 'CoreRecommenderBundle:Recommender:recContent.html.twig' with {"articles":specificArticles}%}
+        {% endif%}
+    </div>
+{% endblock %}

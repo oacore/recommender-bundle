@@ -1,0 +1,25 @@
+parameters:
+    core.apiLimitercache.class: Core\ApiBundle\Service\ApiLimiterCacheService
+    core.recommender.class: Core\RecommenderBundle\Service\RecommenderService
+    core.freetextrecommender.class: Core\RecommenderBundle\Service\FreeTextRecommenderService
+#    core_api_v2.example.class: Core\ApiBundle\Example
+
+# app/config/services.yml
+services:
+    kernel.listener.core_api_keyListener:
+       class: Core\ApiBundle\EventListener\ApiKeyListener
+       arguments: [ @doctrine.orm.entity_manager, @core.cache, @logger ]
+       tags:
+           - { name: kernel.event_listener, event: kernel.controller, method: onKernelController, priority: 10 }
+    core.recommender:
+        class: "%core.recommender.class%"
+        arguments:  [@logger, %recommender%, '@happyr.google_analytics.tracker']
+    core.freetextrecommender:
+        class: "%core.freetextrecommender.class%"
+        arguments:  [@logger, %recommender%]
+        
+# app/config/services.yml
+    core.setLocale:
+        class: Core\RecommenderBundle\EventListener\SetLocaleListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 500}
